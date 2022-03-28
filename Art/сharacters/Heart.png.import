@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Slime Mob.png-4a81430af52ff3508e4befba7136134a.stex"
+path="res://.import/Heart.png-e8cd7de1a5c3f7a5e8fb86ab3a9faf9f.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/Slime Mob.png"
-dest_files=[ "res://.import/Slime Mob.png-4a81430af52ff3508e4befba7136134a.stex" ]
+source_file="res://Art/сharacters/Heart.png"
+dest_files=[ "res://.import/Heart.png-e8cd7de1a5c3f7a5e8fb86ab3a9faf9f.stex" ]
 
 [params]
 

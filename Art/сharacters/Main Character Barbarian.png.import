@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/One-eyed Bat.png-07a5c3c5b517a84635f8ede8e5d90da9.stex"
+path="res://.import/Main Character Barbarian.png-3747c07c6807b1a26eb2c38748841115.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/One-eyed Bat.png"
-dest_files=[ "res://.import/One-eyed Bat.png-07a5c3c5b517a84635f8ede8e5d90da9.stex" ]
+source_file="res://Art/сharacters/Main Character Barbarian.png"
+dest_files=[ "res://.import/Main Character Barbarian.png-3747c07c6807b1a26eb2c38748841115.stex" ]
 
 [params]
 
