@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://Art/сharacters/Main Character Barbarian.png" type="Texture" id=2]
@@ -15,8 +15,18 @@ animation = "Fall"
 [sub_resource type="AnimationNodeAnimation" id=16]
 animation = "Jump"
 
+[sub_resource type="AnimationNodeAnimation" id=18]
+animation = "Attack"
+
 [sub_resource type="AnimationNodeAnimation" id=10]
 animation = "Idle"
+
+[sub_resource type="AnimationNodeTransition" id=19]
+input_count = 2
+input_0/name = "Calm"
+input_0/auto_advance = false
+input_1/name = "Attack"
+input_1/auto_advance = false
 
 [sub_resource type="AnimationNodeTransition" id=17]
 input_count = 2
@@ -40,7 +50,7 @@ input_1/name = "Run"
 input_1/auto_advance = false
 
 [sub_resource type="AnimationNodeBlendTree" id=2]
-graph_offset = Vector2( 183.274, 103.744 )
+graph_offset = Vector2( 292.737, 177.791 )
 nodes/Animation/node = SubResource( 10 )
 nodes/Animation/position = Vector2( 200, 170 )
 "nodes/Animation 2/node" = SubResource( 11 )
@@ -49,18 +59,22 @@ nodes/Animation/position = Vector2( 200, 170 )
 "nodes/Animation 3/position" = Vector2( 400, 310 )
 "nodes/Animation 4/node" = SubResource( 16 )
 "nodes/Animation 4/position" = Vector2( 400, 420 )
+"nodes/Animation 5/node" = SubResource( 18 )
+"nodes/Animation 5/position" = Vector2( 750, 340 )
+nodes/Attack/node = SubResource( 19 )
+nodes/Attack/position = Vector2( 970, 170 )
 nodes/InAir/node = SubResource( 17 )
-nodes/InAir/position = Vector2( 580, 330 )
+nodes/InAir/position = Vector2( 580, 320 )
 nodes/InAirState/node = SubResource( 14 )
 nodes/InAirState/position = Vector2( 750, 170 )
 nodes/Movement/node = SubResource( 12 )
 nodes/Movement/position = Vector2( 400, 170 )
-nodes/output/position = Vector2( 950, 170 )
-node_connections = [ "output", 0, "InAirState", "InAirState", 0, "Movement", "InAirState", 1, "InAir", "InAir", 0, "Animation 3", "InAir", 1, "Animation 4", "Movement", 0, "Animation", "Movement", 1, "Animation 2" ]
+nodes/output/position = Vector2( 1170, 170 )
+node_connections = [ "output", 0, "Attack", "Attack", 0, "InAirState", "Attack", 1, "Animation 5", "InAirState", 0, "Movement", "InAirState", 1, "InAir", "InAir", 0, "Animation 3", "InAir", 1, "Animation 4", "Movement", 0, "Animation", "Movement", 1, "Animation 2" ]
 
 [sub_resource type="Animation" id=6]
 resource_name = "Attack"
-length = 0.5
+length = 0.4
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -68,10 +82,24 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 80, 81, 82, 83, 84 ]
+"values": [ 81, 82, 83, 84 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.4 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "on_attack_animation_ended"
+} ]
 }
 
 [sub_resource type="Animation" id=8]
@@ -204,6 +232,7 @@ shape = SubResource( 1 )
 tree_root = SubResource( 2 )
 anim_player = NodePath("../AnimationPlayer")
 active = true
+parameters/Attack/current = 0
 parameters/InAir/current = 0
 parameters/InAirState/current = 1
 parameters/Movement/current = 1

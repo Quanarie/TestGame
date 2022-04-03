@@ -58,3 +58,9 @@ func _physics_process(delta):
 		velocity.x = lerp(velocity.x, 0, slowdown_coefficient_air)
 	
 	velocity = move_and_slide(velocity, Vector2.UP)
+	
+	if Input.is_action_just_pressed("attack"):
+		animationTree.set("parameters/Attack/current", 1)
+		
+func on_attack_animation_ended():
+	animationTree.set("parameters/Attack/current", 0)
