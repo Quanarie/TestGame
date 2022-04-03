@@ -1,8 +1,9 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://Art/сharacters/Main Character Barbarian.png" type="Texture" id=2]
 [ext_resource path="res://Other/Hitbox.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Other/Hurtbox.tscn" type="PackedScene" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 7.5, 12.5 )
@@ -287,4 +288,11 @@ rotation = -1.5708
 shape = SubResource( 20 )
 disabled = true
 
+[node name="Hurtbox" parent="." instance=ExtResource( 4 )]
+collision_layer = 8
+collision_mask = 0
+
+[connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
+
 [editable path="Hitbox"]
+[editable path="Hurtbox"]
