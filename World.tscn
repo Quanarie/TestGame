@@ -1,8 +1,9 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Art/tilesets/TileSet.png" type="Texture" id=2]
 [ext_resource path="res://Environment/Rock.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Other/TestEnemy.tscn" type="PackedScene" id=4]
 
 [sub_resource type="ConvexPolygonShape2D" id=2]
 points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
@@ -277,3 +278,6 @@ position = Vector2( 183, 97 )
 
 [node name="Rock" parent="." instance=ExtResource( 3 )]
 position = Vector2( 145, 141 )
+
+[node name="TestEnemy" parent="." instance=ExtResource( 4 )]
+position = Vector2( 229, 138 )

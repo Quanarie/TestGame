@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://Art/сharacters/Main Character Barbarian.png" type="Texture" id=2]
@@ -246,6 +246,10 @@ tracks/0/keys = {
 radius = 7.0
 height = 12.0
 
+[sub_resource type="CapsuleShape2D" id=21]
+radius = 6.0
+height = 12.0
+
 [node name="Player" type="KinematicBody2D"]
 collision_layer = 2
 script = ExtResource( 1 )
@@ -291,6 +295,10 @@ disabled = true
 [node name="Hurtbox" parent="." instance=ExtResource( 4 )]
 collision_layer = 8
 collision_mask = 0
+
+[node name="CollisionShape2D" parent="Hurtbox" index="0"]
+position = Vector2( 0, 1 )
+shape = SubResource( 21 )
 
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
 

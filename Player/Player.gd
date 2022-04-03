@@ -13,10 +13,11 @@ var velocity = Vector2.ZERO
 onready var sprite = $Sprite
 onready var animationTree = $AnimationTree
 onready var hitbox = $Hitbox
-onready var playerStats = PlayerStats
+onready var stats = PlayerStats
 
 func _ready():
 	animationTree.active = true
+	stats.connect("no_health", self, "queue_free")
 
 func _physics_process(delta):
 	velocity.y += gravity * delta
@@ -70,4 +71,4 @@ func on_attack_animation_ended():
 	animationTree.set("parameters/Attack/current", 0)
 
 func _on_Hurtbox_area_entered(area):
-	playerStats.health -= area.damage
+	stats.health -= area.damage
