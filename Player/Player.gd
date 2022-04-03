@@ -12,6 +12,7 @@ var velocity = Vector2.ZERO
 
 onready var sprite = $Sprite
 onready var animationTree = $AnimationTree
+onready var hitbox = $Hitbox
 
 func _ready():
 	animationTree.active = true
@@ -27,12 +28,14 @@ func _physics_process(delta):
 			velocity.x *= (1 - slowdown_coefficient_ground)   #helps to change direction faster
 		velocity.x = min(velocity.x + acceleration * delta, max_speed)
 		sprite.flip_h = false
+		hitbox.rotation_degrees = 0
 	elif Input.is_action_pressed("ui_left"):
 		animationTree.set("parameters/Movement/current", 1)
 		if velocity.x > 0:
 			velocity.x *= (1 - slowdown_coefficient_ground)
 		velocity.x = max(velocity.x - acceleration * delta, -max_speed)
 		sprite.flip_h = true
+		hitbox.rotation_degrees = 180
 	else:
 		animationTree.set("parameters/Movement/current", 0)
 		apply_friction = true

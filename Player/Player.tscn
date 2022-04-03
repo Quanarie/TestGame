@@ -1,7 +1,8 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://Art/сharacters/Main Character Barbarian.png" type="Texture" id=2]
+[ext_resource path="res://Other/Hitbox.tscn" type="PackedScene" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 7.5, 12.5 )
@@ -70,11 +71,12 @@ nodes/InAirState/position = Vector2( 750, 170 )
 nodes/Movement/node = SubResource( 12 )
 nodes/Movement/position = Vector2( 400, 170 )
 nodes/output/position = Vector2( 1170, 170 )
-node_connections = [ "output", 0, "Attack", "Attack", 0, "InAirState", "Attack", 1, "Animation 5", "InAirState", 0, "Movement", "InAirState", 1, "InAir", "InAir", 0, "Animation 3", "InAir", 1, "Animation 4", "Movement", 0, "Animation", "Movement", 1, "Animation 2" ]
+node_connections = [ "Attack", 0, "InAirState", "Attack", 1, "Animation 5", "InAir", 0, "Animation 3", "InAir", 1, "Animation 4", "InAirState", 0, "Movement", "InAirState", 1, "InAir", "Movement", 0, "Animation", "Movement", 1, "Animation 2", "output", 0, "Attack" ]
 
 [sub_resource type="Animation" id=6]
 resource_name = "Attack"
 length = 0.4
+step = 0.05
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -100,6 +102,18 @@ tracks/1/keys = {
 "args": [  ],
 "method": "on_attack_animation_ended"
 } ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Hitbox/CollisionShape2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.05, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
 }
 
 [sub_resource type="Animation" id=8]
@@ -197,6 +211,18 @@ tracks/0/keys = {
 "update": 0,
 "values": [ 0 ]
 }
+tracks/1/type = "value"
+tracks/1/path = NodePath("Hitbox/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
 
 [sub_resource type="Animation" id=5]
 resource_name = "Run"
@@ -215,6 +241,10 @@ tracks/0/keys = {
 "values": [ 10, 11, 12, 13, 14, 15 ]
 }
 
+[sub_resource type="CapsuleShape2D" id=20]
+radius = 7.0
+height = 12.0
+
 [node name="Player" type="KinematicBody2D"]
 collision_layer = 2
 script = ExtResource( 1 )
@@ -231,7 +261,6 @@ shape = SubResource( 1 )
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource( 2 )
 anim_player = NodePath("../AnimationPlayer")
-active = true
 parameters/Attack/current = 0
 parameters/InAir/current = 0
 parameters/InAirState/current = 1
@@ -246,3 +275,16 @@ anims/Idle = SubResource( 3 )
 anims/Jump = SubResource( 15 )
 anims/RESET = SubResource( 4 )
 anims/Run = SubResource( 5 )
+
+[node name="Hitbox" parent="." instance=ExtResource( 3 )]
+position = Vector2( 0, 6 )
+collision_layer = 0
+collision_mask = 16
+
+[node name="CollisionShape2D" parent="Hitbox" index="0"]
+position = Vector2( 15, 0 )
+rotation = -1.5708
+shape = SubResource( 20 )
+disabled = true
+
+[editable path="Hitbox"]
