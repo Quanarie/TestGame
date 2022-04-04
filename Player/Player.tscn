@@ -285,6 +285,7 @@ anims/Run = SubResource( 5 )
 position = Vector2( 0, 6 )
 collision_layer = 0
 collision_mask = 16
+knockback_force = 300
 
 [node name="CollisionShape2D" parent="Hitbox" index="0"]
 position = Vector2( 15, 0 )
